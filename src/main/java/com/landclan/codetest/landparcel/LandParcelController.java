@@ -19,27 +19,27 @@ public class LandParcelController {
 
     private final LandParcelService landParcelService;
 
-    @PostMapping("/create")
+    @PostMapping()
     public ResponseEntity<LandParcelDto> createLandParcel(@RequestBody LandParcelDto landParcelDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(landParcelService.createNewLandParcel(landParcelDto));
     }
 
-    @GetMapping("/get")
+    @GetMapping()
     public ResponseEntity<List<LandParcelDto>> getAllLandParcels() {
         return ResponseEntity.ok(landParcelService.getAllLandParcels());
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<LandParcelDto> getLandParcel(@PathVariable Long id) {
         return ResponseEntity.ok(landParcelService.getLandParcel(id));
     }
 
-    @PutMapping("/update")
+    @PutMapping("/{id}")
     public ResponseEntity<LandParcelDto> updateExistingLandParcel(@RequestBody LandParcelDto landParcelDto) {
         return ResponseEntity.ok(landParcelService.updateNewLandParcel(landParcelDto));
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<LandParcelDto> deleteLandParcel(@PathVariable Long id) {
         return ResponseEntity.ok(landParcelService.deleteLandParcel(id));
     }
