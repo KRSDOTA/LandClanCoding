@@ -16,12 +16,12 @@ public class LandParcelInMemoryService implements LandParcelService {
 
     @Override
     public List<LandParcelDto> getAllLandParcels() {
-        return null;
+        return landParcelMapper.convertFromSourceToTarget(landParcelRepository.findAll());
     }
 
     @Override
     public LandParcelDto getLandParcel(Long id) {
-        return null;
+        return landParcelMapper.convertFromSourceToTarget(landParcelRepository.getReferenceById(id));
     }
 
     @Override

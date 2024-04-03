@@ -6,7 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- * Class responsible for Declaring how spring application context (dependency container)
+ * Responsible for declaring how spring application context (dependency container)
  * should standup LandParcelService.
  */
 @Configuration

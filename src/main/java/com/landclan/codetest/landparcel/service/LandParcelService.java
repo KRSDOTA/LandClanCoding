@@ -4,6 +4,9 @@ import com.landclan.codetest.landparcel.domain.LandParcelDto;
 
 import java.util.List;
 
+/**
+ * CRUD abstraction for clients to depend on for LandParcel operations
+ */
 public interface LandParcelService {
 
     List<LandParcelDto> getAllLandParcels();

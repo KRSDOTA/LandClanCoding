@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * Entry point for client applications.
+ * Entry point from upstream client request, called by servlet architecture (container) to handle incoming requests
  */
 @AllArgsConstructor
 @RequestMapping("/land-parcel")
