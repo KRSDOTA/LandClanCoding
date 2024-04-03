@@ -1,4 +1,4 @@
-package com.landclan.codetest.landparcel;
+package com.landclan.codetest.landparcel.domain;
 
 public enum LandParcelStatus {
     SAVED,

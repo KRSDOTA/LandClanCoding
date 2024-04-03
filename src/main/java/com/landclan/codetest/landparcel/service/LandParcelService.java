@@ -1,4 +1,6 @@
-package com.landclan.codetest.landparcel;
+package com.landclan.codetest.landparcel.service;
+
+import com.landclan.codetest.landparcel.domain.LandParcelDto;
 
 import java.util.List;
 

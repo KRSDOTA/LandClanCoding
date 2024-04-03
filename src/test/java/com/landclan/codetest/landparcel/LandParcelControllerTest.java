@@ -1,5 +1,8 @@
 package com.landclan.codetest.landparcel;
 
+import com.landclan.codetest.landparcel.domain.LandParcelDto;
+import com.landclan.codetest.landparcel.domain.LandParcelStatus;
+import com.landclan.codetest.landparcel.service.LandParcelService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
