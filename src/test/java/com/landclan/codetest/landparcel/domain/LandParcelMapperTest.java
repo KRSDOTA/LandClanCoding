@@ -1,5 +1,6 @@
 package com.landclan.codetest.landparcel.domain;
 
+import com.landclan.codetest.landparcel.LandParcelTestHelper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,26 +23,12 @@ public class LandParcelMapperTest {
 
     @BeforeEach
     void setUp() {
-        final LandParcel landParcel = new LandParcel();
-        landParcel.setObjectId(1L);
-        landParcel.setLandParcelStatus(LandParcelStatus.UNDER_CONSIDERATION);
-        landParcel.setArea(1000d);
-        landParcel.setConstraints(true);
-        landParcel.setName("Very cool parcel");
-
         landParcels = Collections.singletonList(
-                landParcel
+                LandParcelTestHelper.createLandParcel()
         );
 
         landParcelDtos = Collections.singletonList(
-                LandParcelDto
-                        .builder()
-                        .objectId(1L)
-                        .landParcelStatus(LandParcelStatus.UNDER_CONSIDERATION)
-                        .area(1000d)
-                        .constraints(true)
-                        .name("Very cool parcel")
-                        .build()
+                LandParcelTestHelper.createLandParcelDto()
         );
     }
 
@@ -49,7 +36,7 @@ public class LandParcelMapperTest {
     void shouldSuccessfullyMapLandParcelToDto() {
         final LandParcel inputLandParcel = landParcels.get(0);
 
-        final LandParcelDto outputLandParcelDto = landParcelMapper.convertFromSourceToTarget(inputLandParcel);
+        final LandParcelDto outputLandParcelDto = landParcelMapper.convertFromTargetToSource(inputLandParcel);
 
         assertLandParcelInputFieldsMapCorrectlyToOutput(inputLandParcel, outputLandParcelDto);
     }
@@ -58,7 +45,7 @@ public class LandParcelMapperTest {
     void shouldSuccessfullyMapRequestDtoToDomain() {
         final LandParcelDto inputLandParcelDto = landParcelDtos.get(0);
 
-        final LandParcel outputLandParcel = landParcelMapper.convertFromTargetToSource(inputLandParcelDto);
+        final LandParcel outputLandParcel = landParcelMapper.convertFromSourceToTarget(inputLandParcelDto);
 
         assertLandParcelInputDtoFieldsMapCorrectlyToOutput(inputLandParcelDto, outputLandParcel);
     }

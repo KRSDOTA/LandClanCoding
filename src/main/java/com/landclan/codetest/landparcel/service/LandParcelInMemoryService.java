@@ -1,7 +1,8 @@
 package com.landclan.codetest.landparcel.service;
 
+import com.landclan.codetest.DomainMapper;
+import com.landclan.codetest.landparcel.domain.LandParcel;
 import com.landclan.codetest.landparcel.domain.LandParcelDto;
-import com.landclan.codetest.landparcel.domain.LandParcelMapper;
 import com.landclan.codetest.landparcel.persistence.LandParcelRepository;
 import lombok.AllArgsConstructor;
 
@@ -12,30 +13,34 @@ public class LandParcelInMemoryService implements LandParcelService {
 
     private LandParcelRepository landParcelRepository;
 
-    private LandParcelMapper landParcelMapper;
+    private DomainMapper<LandParcelDto, LandParcel> landParcelMapper;
 
     @Override
     public List<LandParcelDto> getAllLandParcels() {
-        return landParcelMapper.convertFromSourceToTarget(landParcelRepository.findAll());
+        return landParcelMapper.convertFromTargetToSource(landParcelRepository.findAll());
     }
 
     @Override
     public LandParcelDto getLandParcel(Long id) {
-        return landParcelMapper.convertFromSourceToTarget(landParcelRepository.getReferenceById(id));
+        return landParcelMapper.convertFromTargetToSource(landParcelRepository.getReferenceById(id));
     }
 
     @Override
     public LandParcelDto createNewLandParcel(LandParcelDto landParcelToCreate) {
-        return null;
+        final LandParcel landParcelToSave = landParcelMapper.convertFromSourceToTarget(landParcelToCreate);
+        return landParcelMapper.convertFromTargetToSource(landParcelRepository.save(landParcelToSave));
     }
 
     @Override
     public LandParcelDto updateNewLandParcel(LandParcelDto landParcelToUpdate) {
-        return null;
+        final LandParcel landParcelUpdateToSave = landParcelMapper.convertFromSourceToTarget(landParcelToUpdate);
+        return landParcelMapper.convertFromTargetToSource(landParcelRepository.save(landParcelUpdateToSave));
     }
 
     @Override
     public LandParcelDto deleteLandParcel(Long id) {
-        return null;
+        final LandParcel landParcelToDelete = landParcelRepository.getReferenceById(id);
+        landParcelRepository.delete(landParcelToDelete);
+        return landParcelMapper.convertFromTargetToSource(landParcelToDelete);
     }
 }

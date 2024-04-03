@@ -3,20 +3,20 @@ package com.landclan.codetest;
 import java.util.List;
 
 /**
- * Contract specifying conversion between some Target (B) and a source (B)
+ * Contract specifying conversion between some source type (A) and a target Type (B)
  * And back again
  *
- * @param <A> Target
- * @param <B> Source
+ * @param <A> Source
+ * @param <B> Target
  */
 public interface DomainMapper<A, B> {
 
-    A convertFromSourceToTarget(B source);
+    B convertFromSourceToTarget(A source);
 
-    List<A> convertFromSourceToTarget(List<B> sources);
+    List<B> convertFromSourceToTarget(List<A> sources);
 
-    B convertFromTargetToSource(A target);
+    A convertFromTargetToSource(B target);
 
-    List<B> convertFromTargetToSource(List<A> targets);
+    List<A> convertFromTargetToSource(List<B> targets);
 
 }

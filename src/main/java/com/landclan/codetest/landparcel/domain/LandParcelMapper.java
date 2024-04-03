@@ -13,36 +13,37 @@ import java.util.List;
 @Component
 public class LandParcelMapper implements DomainMapper<LandParcelDto, LandParcel> {
 
-    public LandParcelDto convertFromSourceToTarget(LandParcel source) {
-        return LandParcelDto
-                .builder()
-                .landParcelStatus(source.getLandParcelStatus())
-                .area(source.getArea())
-                .constraints(source.getConstraints())
-                .name(source.getName())
-                .objectId(source.getObjectId())
-                .build();
+    public LandParcel convertFromSourceToTarget(LandParcelDto source) {
+        final LandParcel landParcel = new LandParcel();
+        landParcel.setLandParcelStatus(source.getLandParcelStatus());
+        landParcel.setArea(source.getArea());
+        landParcel.setConstraints(source.getConstraints());
+        landParcel.setName(source.getName());
+        landParcel.setObjectId(source.getObjectId());
+        return landParcel;
     }
 
-    public List<LandParcelDto> convertFromSourceToTarget(List<LandParcel> sources) {
+    public List<LandParcel> convertFromSourceToTarget(List<LandParcelDto> sources) {
         return sources
                 .stream()
                 .map(this::convertFromSourceToTarget)
                 .toList();
     }
 
-    public LandParcel convertFromTargetToSource(LandParcelDto target) {
-        final LandParcel landParcel = new LandParcel();
-                landParcel.setLandParcelStatus(target.getLandParcelStatus());
-                landParcel.setArea(target.getArea());
-                landParcel.setConstraints(target.getConstraints());
-                landParcel.setName(target.getName());
-                landParcel.setObjectId(target.getObjectId());
-        return landParcel;
+    public LandParcelDto convertFromTargetToSource(LandParcel target) {
+        return LandParcelDto
+                .builder()
+                .landParcelStatus(target.getLandParcelStatus())
+                .area(target.getArea())
+                .constraints(target.getConstraints())
+                .name(target.getName())
+                .objectId(target.getObjectId())
+                .build();
     }
 
-    public List<LandParcel> convertFromTargetToSource(List<LandParcelDto> targets) {
-        return targets
+    public List<LandParcelDto> convertFromTargetToSource(List<LandParcel> sources) {
+
+        return sources
                 .stream()
                 .map(this::convertFromTargetToSource)
                 .toList();
