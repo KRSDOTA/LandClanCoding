@@ -27,7 +27,7 @@ public class LandParcelController {
     }
 
     @GetMapping("/get/{id}")
-    public ResponseEntity<LandParcelDto> getAllLandParcel(@PathVariable Long id) {
+    public ResponseEntity<LandParcelDto> getLandParcel(@PathVariable Long id) {
         return ResponseEntity.ok(landParcelService.getLandParcel(id));
     }
 
