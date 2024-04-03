@@ -1,17 +1,24 @@
 package com.landclan.codetest.landparcel.domain;
 
-import com.landclan.codetest.DomainMapper;
+import com.landclan.codetest.DomainConverter;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
 /**
  * Separate out the landParcel business/entity from transport form of LandParcel entity,
- * any custom logic for mapping between transport and domain objects go here
- *
+ * any custom logic for mapping between transport and domain objects go here!
  */
 @Component
-public class LandParcelMapper implements DomainMapper<LandParcelDto, LandParcel> {
+public class LandParcelMapper implements DomainConverter<LandParcelDto, LandParcel> {
+
+    public void convertFromSourceToTarget(LandParcelDto source, LandParcel target) {
+        target.setArea(source.getArea());
+        target.setName(source.getName());
+        target.setConstraints(source.getConstraints());
+        target.setLandParcelStatus(source.getLandParcelStatus());
+        target.setLandParcelStatus(source.getLandParcelStatus());
+    }
 
     public LandParcel convertFromSourceToTarget(LandParcelDto source) {
         final LandParcel landParcel = new LandParcel();
@@ -21,13 +28,6 @@ public class LandParcelMapper implements DomainMapper<LandParcelDto, LandParcel>
         landParcel.setName(source.getName());
         landParcel.setObjectId(source.getObjectId());
         return landParcel;
-    }
-
-    public List<LandParcel> convertFromSourceToTarget(List<LandParcelDto> sources) {
-        return sources
-                .stream()
-                .map(this::convertFromSourceToTarget)
-                .toList();
     }
 
     public LandParcelDto convertFromTargetToSource(LandParcel target) {

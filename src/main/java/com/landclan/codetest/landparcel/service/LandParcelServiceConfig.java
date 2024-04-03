@@ -15,7 +15,7 @@ public class LandParcelServiceConfig {
     @Bean
     public LandParcelService createLandParcelServiceBean(LandParcelRepository landParcelRepository,
                                                          LandParcelMapper landParcelMapper) {
-        return new LandParcelInMemoryService(landParcelRepository, landParcelMapper);
+        return new LandParcelJpaService(landParcelRepository, landParcelMapper);
     }
 
 }

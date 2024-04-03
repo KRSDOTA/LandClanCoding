@@ -1,6 +1,6 @@
 package com.landclan.codetest.landparcel.service;
 
-import com.landclan.codetest.DomainMapper;
+import com.landclan.codetest.DomainConverter;
 import com.landclan.codetest.landparcel.LandParcelTestHelper;
 import com.landclan.codetest.landparcel.domain.LandParcel;
 import com.landclan.codetest.landparcel.domain.LandParcelDto;
@@ -19,11 +19,11 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 public class LandParcelInMemoryServiceTest {
-    @InjectMocks private LandParcelInMemoryService landParcelInMemoryService;
+    @InjectMocks private LandParcelJpaService landParcelInMemoryService;
 
     @Mock private LandParcelRepository landParcelRepository;
 
-    @Mock private DomainMapper<LandParcelDto, LandParcel> landParcelMapper;
+    @Mock private DomainConverter<LandParcelDto, LandParcel> landParcelMapper;
 
     private final LandParcel landParcel = LandParcelTestHelper.createLandParcel();
 
@@ -42,8 +42,30 @@ public class LandParcelInMemoryServiceTest {
 
     @Test
     void shouldGetByReferenceId() {
+        when(landParcelRepository.getReferenceById(landParcelDto.getObjectId())).thenReturn(landParcel);
+        when(landParcelMapper.convertFromTargetToSource(landParcel)).thenReturn(landParcelDto);
 
+        final LandParcelDto actualLandPassDto = landParcelInMemoryService.getLandParcel(landParcelDto.getObjectId());
+
+        assertThat(actualLandPassDto).isEqualTo(landParcelDto);
     }
+
+    @Test
+    void shouldCreateNewParcelAndReturnCorrectDto() {
+        when(landParcelRepository.getReferenceById(landParcelDto.getObjectId())).thenReturn(landParcel);
+        when(landParcelMapper.convertFromTargetToSource(landParcel)).thenReturn(landParcelDto);
+
+        final LandParcelDto actualLandParcel = landParcelInMemoryService.createNewLandParcel(landParcelDto);
+
+        assertThat(actualLandParcel).isEqualTo(landParcelDto);
+    }
+
+//    @Test
+//    void shouldUpdateExistingParcelAndReturnCorrectDto() {
+//        when(landParcelRepository.getReferenceById(landParcelDto.getObjectId())).thenReturn(landParcel);
+//        when(landParcelMapper.convertFromTargetToSource(landParcel)).thenReturn(landParcelDto);
+//
+//    }
 
 
 }

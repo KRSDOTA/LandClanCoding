@@ -5,7 +5,7 @@ import com.landclan.codetest.landparcel.domain.LandParcelDto;
 import java.util.List;
 
 /**
- * CRUD abstraction for clients to depend on for LandParcel operations
+ * CRUD abstraction for clients to depend on for LandParcel entity
  */
 public interface LandParcelService {
 

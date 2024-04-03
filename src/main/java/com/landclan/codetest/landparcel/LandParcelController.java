@@ -34,11 +34,10 @@ public class LandParcelController {
         return ResponseEntity.ok(landParcelService.getLandParcel(id));
     }
 
-    @PostMapping("/update")
+    @PutMapping("/update")
     public ResponseEntity<LandParcelDto> updateExistingLandParcel(@RequestBody LandParcelDto landParcelDto) {
         return ResponseEntity.ok(landParcelService.updateNewLandParcel(landParcelDto));
     }
-
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<LandParcelDto> deleteLandParcel(@PathVariable Long id) {
