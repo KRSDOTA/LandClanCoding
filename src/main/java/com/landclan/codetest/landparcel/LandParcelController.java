@@ -1,6 +1,8 @@
 package com.landclan.codetest.landparcel;
 
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +20,7 @@ public class LandParcelController {
 
     @PostMapping("/create")
     public ResponseEntity<LandParcelDto> createLandParcel(@RequestBody LandParcelDto landParcelDto) {
-        return ResponseEntity.ok(landParcelService.createNewLandParcel(landParcelDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(landParcelService.createNewLandParcel(landParcelDto));
     }
 
     @GetMapping("/get")
@@ -38,7 +40,7 @@ public class LandParcelController {
 
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> deleteLandParcel(@PathVariable Long id) {
+    public ResponseEntity<LandParcelDto> deleteLandParcel(@PathVariable Long id) {
         return ResponseEntity.ok(landParcelService.deleteLandParcel(id));
     }
 

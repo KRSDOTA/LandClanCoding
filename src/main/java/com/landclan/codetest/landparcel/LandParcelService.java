@@ -12,5 +12,5 @@ public interface LandParcelService {
 
     LandParcelDto updateNewLandParcel(LandParcelDto landParcelToUpdate);
 
-    boolean deleteLandParcel(Long id);
+    LandParcelDto deleteLandParcel(Long id);
 }

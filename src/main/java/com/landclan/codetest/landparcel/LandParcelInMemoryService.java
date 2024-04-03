@@ -2,7 +2,7 @@ package com.landclan.codetest.landparcel;
 
 import java.util.List;
 
-public class LandParcelInMemoryService implements LandParcelService{
+public class LandParcelInMemoryService implements LandParcelService {
     @Override
     public List<LandParcelDto> getAllLandParcels() {
         return null;
@@ -24,7 +24,7 @@ public class LandParcelInMemoryService implements LandParcelService{
     }
 
     @Override
-    public boolean deleteLandParcel(Long id) {
-        return false;
+    public LandParcelDto deleteLandParcel(Long id) {
+        return null;
     }
 }

@@ -36,32 +36,54 @@ public class LandParcelControllerTest {
     }
 
     @Test
+    public void shouldReturnCreatedHttpStatusCode() {
+        when(landParcelService.createNewLandParcel(mockLandParcelDto)).thenReturn(mockLandParcelDto);
+
+        ResponseEntity<LandParcelDto> actualLandParcelResponse = landParcelController.createLandParcel(mockLandParcelDto);
+
+        assertThat(actualLandParcelResponse.getStatusCode()).isEqualTo(HttpStatus.CREATED);
+        assertThat(actualLandParcelResponse.getBody()).isEqualTo(mockLandParcelDto);
+    }
+
+
+    @Test
     public void shouldGetAllLandParcels() {
         landParcelController.getAllLandParcels();
 
-        verify(landParcelController).getAllLandParcels();
+        verify(landParcelService).getAllLandParcels();
     }
 
 
     @Test
     public void shouldGetLandParcelForValidId() {
-        final Long landParcelId = 1L;
-        when(landParcelService.getLandParcel(landParcelId)).thenReturn(mockLandParcelDto);
+        when(landParcelService.getLandParcel(mockLandParcelDto.getObjectId())).thenReturn(mockLandParcelDto);
 
-        final ResponseEntity<LandParcelDto> actualLandParcelDto = landParcelController.getLandParcel(landParcelId);
+        final ResponseEntity<LandParcelDto> actualLandParcelResponse = landParcelController.getLandParcel(mockLandParcelDto.getObjectId());
+
+        assertThat(actualLandParcelResponse.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(actualLandParcelResponse.getBody()).isEqualTo(mockLandParcelDto);
+    }
+
+    @Test
+    public void shouldUpdateExistingLandParcel() {
+        mockLandParcelDto.setName("some cool new name");
+
+        when(landParcelService.updateNewLandParcel(mockLandParcelDto)).thenReturn(mockLandParcelDto);
+
+        final ResponseEntity<LandParcelDto> actualLandParcelDto = landParcelController.updateExistingLandParcel(mockLandParcelDto);
 
         assertThat(actualLandParcelDto.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(actualLandParcelDto.getBody()).isEqualTo(mockLandParcelDto);
     }
 
     @Test
-    public void shouldUpdateExistingLandParcel() {
-
-    }
-
-    @Test
     public void shouldDeleteLandParcel() {
+        when(landParcelService.deleteLandParcel(mockLandParcelDto.getObjectId())).thenReturn(mockLandParcelDto);
 
+        final ResponseEntity<LandParcelDto> deletedLandParcelDto = landParcelController.deleteLandParcel(mockLandParcelDto.getObjectId());
+
+        assertThat(deletedLandParcelDto.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(deletedLandParcelDto.getBody()).isEqualTo(mockLandParcelDto);
     }
 
 }
