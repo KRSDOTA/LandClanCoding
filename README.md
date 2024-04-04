@@ -7,6 +7,8 @@ Welcome to the LandParcel CRUD service, I hope you enjoy your stay!
 Make sure you have your `JAVA_HOME` pointing at your local installation
 of a java 21 runtime then navigate to the project root in your favourite shell and run:
 
+`./mvnw compile` to get our target jar, followed by: 
+
 `./mvnw exec:java` or `./mvnw spring-boot:run` 
 
 ## Standing up Through Intellji
