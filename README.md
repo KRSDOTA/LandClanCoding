@@ -32,7 +32,7 @@ Upon successfully standing up our application, there are two ways of getting dat
    2) copy the contents of `populate_h2_database.sql` and press `run`
 2) run `./CreateNewLandParcel.sh`
 
-Be warned that should you choose option `1` makes creating new instances through the API impossible. Trying to after
+Be warned that choosing option `1` makes creating new instances through the API impossible. Trying to after
 running the seeding script will result in the PK constraint error:
 
 `JdbcSQLIntegrityConstraintViolationException: Unique index or primary key violation: PRIMARY KEY ON PUBLIC.LAND_PARCEL(OBJECT_ID)`
@@ -44,7 +44,10 @@ I'm sure this is a problem which is easily fixable, however in the interest of t
 
 # Interacting with the API
 
-Included under `test_scripts` are a handful of lightweight `.sh` scripts which wrap around `cURL` for targeting the API
+Please make sure you have a shell environment installed in addition with the `jq` package available on your system
+path https://jqlang.github.io/jq/
+
+Included under `test_scripts` are a handful of lightweight `.sh` scripts which wrap around `cURL` for targeting the API.
 
 I would recommend running in the following order 
 
@@ -55,4 +58,4 @@ I would recommend running in the following order
 5) `DeleteCreatedEntity` -> Returns 200 and details of the entity deleted
 6) `GetAllLandParcels.sh` -> returns 200 OK with no data, verifying data has been deleted
 
-Otherwise feel free to use whatever commandline tool or application your prefer.
+Otherwise, feel free to use whatever commandline tool or application your prefer.
